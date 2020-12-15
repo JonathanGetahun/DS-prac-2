@@ -132,7 +132,6 @@ function pow(base, exponent) {
 function flatten(data) {
     //check if array, if no make it into array and return 
     if (!Array.isArray(data))  {
-        console.log("reached???",[data])
         return [data]
     }
 
@@ -188,9 +187,20 @@ let x = data.reduce((total, val) => {
 // fileFinder(desktop, 'everlong.flac');            // => true
 // fileFinder(desktop, 'sequoia.jpeg');             // => false
 function fileFinder(directories, targetFile) {
-
+    //we have to check if it is an object
+    // Object.prototype.toString.call(directories) === '[object Object]'
+    let hold = []
+    //1. we can check to see if its in current object
+    //2. if not we can check to see if current key has object value recursively
+    // if (directories === null) return false;
+    for (let target in directories){
+        if (directories[target] === targetFile || target === targetFile || fileFinder(directories[target], targetFile)) {
+            hold.push(true)
+        }
+        hold.push(false)
+    }
+    return hold.includes(true)
 }
-
 
 // Write another function, pathFinder(directories, targetFile), that returns the path that contains the targetFile.
 // If the targetFile is not found in the directories, then return null.
@@ -202,9 +212,29 @@ function fileFinder(directories, targetFile) {
 // pathFinder(desktop, 'everlong.flac'));       // => '/music/genres/rock/everlong.flac'
 // pathFinder(desktop, 'honeybadger.png'));     // => null
 function pathFinder(directories, targetFile) {
+    //after we find a match, recursive call to beginning gathers path
+    //you want to return file dict(target) and the directory (target)
+    //or
+    //1. return file
+    //2. return directory
+    // if (Object.prototype.toString.call(directories) !== '[object Object]') return "";
+    
+    for (let key in directories){
+        // if (directories[key] === targetFile) return str += `/${key}/${targetFile}`
+        if (key === targetFile) return '/' + targetFile
+            
+            let currDir = pathFinder(directories[key], targetFile)
+            if (currDir !== null) {
+                return key + currDir
+            }
+        // if (Object.prototype.toString.call(directories[key]) === '[object Object]'){
+        //     console.log("reached", pathFinder(directories[key, targetFile]))
+        //      str += `"${key}"/${pathFinder(directories[key], targetFile)}`
+        // }
+    }
 
+    return null;
 }
-
 
 module.exports = {
     lucasNumber,

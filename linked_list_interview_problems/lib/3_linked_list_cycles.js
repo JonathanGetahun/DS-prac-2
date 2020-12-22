@@ -61,8 +61,34 @@
 // -----------
 function hasCycle(linkedList) {
   // TODO: Implement the hasCycle function!
-
+  node = linkedList.head
+  while (linkedList.length !== 0){
+    if(node.next === null) return false;
+    node = node.next;
+    linkedList.length --;
+  }
+  return true;
 }
+
+/**
+ * 
+ * SOLUTION, mine was faster though?
+ */
+
+// function hasCycle(linkedList) {
+//   // TODO: Implement the hasCycle function!
+//   let slow = linkedList.head;
+//   let fast = linkedList.head;
+//   let pause = true;
+
+//   while (fast = fast.next) {
+//     if (fast === slow) return true;
+//     slow = pause ? slow : slow.next;
+//     pause = !pause;
+//   }
+
+//   return false;
+// };
 
 
 // ----------------------------------------

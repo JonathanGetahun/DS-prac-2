@@ -60,54 +60,55 @@
 // -----------
 // Let's code!
 // -----------
-function reverseLinkedList(linkedList) {
-  // TODO: Implement the reverseLinkedList function!
-    if (linkedList.head.next === null) return linkedList;
-    let nextNode = linkedList.head.next;
-    let prev = linkedList.head;
-    let cycle = true;
-    let lastNode;
-    while(cycle){
-      let nodeAfter = nextNode.next;
-      if(nodeAfter === null){
-        cycle = false;
-        lastNode = nextNode;
-      }
-      nextNode.next = prev;
-      if(nextNode.next === linkedList.head){
-        linkedList.tail = nextNode.next;
-        linkedList.tail.next = null;
-      }
-      prev = nextNode;
-      nextNode = nodeAfter
-    }
+// function reverseLinkedList(linkedList) {
+//   // TODO: Implement the reverseLinkedList function!
+//     if (linkedList.head.next === null) return linkedList;
+//     let nextNode = linkedList.head.next;
+//     let prev = linkedList.head;
+//     let cycle = true;
+//     let lastNode;
+//     while(cycle){
+//       let nodeAfter = nextNode.next;
+//       if(nodeAfter === null){
+//         cycle = false;
+//         lastNode = nextNode;
+//       }
+//       nextNode.next = prev;
+//       if(nextNode.next === linkedList.head){
+//         linkedList.tail = nextNode.next;
+//         linkedList.tail.next = null;
+//       }
+//       prev = nextNode;
+//       nextNode = nodeAfter
+//     }
 
-    linkedList.head = lastNode;
-    return linkedList;
-}
+//     linkedList.head = lastNode;
+//     return linkedList;
+// }
 
 //**** */
 //Solution given
 //*** */
-// function reverseLinkedList(linkedList) {
-//   // TODO: Implement the reverseLinkedList function!
-//   let node = linkedList.head;
-//   let first = node;
-//   let next = null;
-//   let prev = null;
+function reverseLinkedList(linkedList) {
+  // TODO: Implement the reverseLinkedList function!
+  let node = linkedList.head;
+  let first = node;
+  let next = null;
+  let prev = null;
 
-//   while (next = node.next) {
-//     node.next = prev;
-//     prev = node;
-//     node = next;
-//   }
+  //I guess you can break out of it, if node.next is null, and then another .next would make it undefined.
+  while (next = node.next) {
+    node.next = prev;
+    prev = node;
+    node = next;
+  }
 
-//   linkedList.head = node;
-//   linkedList.head.next = prev;  
-//   linkedList.tail = first;
+  linkedList.head = node;
+  linkedList.head.next = prev;  
+  linkedList.tail = first;
 
-//   return linkedList;
-// }
+  return linkedList;
+}
 
 
 

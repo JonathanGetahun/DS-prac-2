@@ -45,7 +45,7 @@ function linkedListIntersection(list1, list2) {
   let StartTwo = list2.head;
   let oneLen = list1.length;
   let twoLen = list2.length;
-
+  console.log(oneLen, twoLen)
   if (oneLen > twoLen){
     for (let i = 0; i < oneLen - twoLen; i++){
       StartOne = StartOne.next;

@@ -20,3 +20,4 @@ var sortedArrayToBST = function(nums) {
     
     return node;
 };
+

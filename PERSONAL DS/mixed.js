@@ -117,3 +117,61 @@ function diagonalDifference(arr) {
     let answer = Math.abs(primary - secondary);
     return answer
 }
+
+/**
+ * LeetCode 62 - Unique Paths - Medium
+ */
+//Used Tabulation to solve, it was pretty simple. Remember to pass array by reference when creating multi-dimmensional arrays.
+var uniquePaths = function(m, n) {
+    let grid = new Array(m).fill().map(() => new Array(n).fill(0));
+
+    
+    for (let row = 0; row < m; row++){
+        for (let col = 0; col < n; col++){
+            grid[row][col] = 1;
+            if (grid[row - 1] && (grid[row - 1][col] + grid[row][col - 1]) > grid[row][col]){
+                grid[row][col] = grid[row - 1][col] + grid[row][col - 1];
+            }
+        }
+
+    }
+    return grid[m - 1][n - 1]
+};
+
+/**
+ * HackerRank - Ransom Note - Easy
+ */
+//Kind of struggled with updating object value, I need to remember each key is unique and if I try to add one with same name 
+//it overwrites, and doesn't add an additional key, value pair. Very obvious 
+//Using logical operators simplifies a lot.
+function checkMagazine(magazine, note) {
+    let repeat = {}
+    magazine.forEach(val => repeat[val] = (repeat[val] || 0) + 1);
+    let contains = note.every(word => repeat[word]--);
+    
+    console.log(contains ? "Yes" : "No")
+ }
+
+ /**
+  * HackerRank - Save the Prisoner! - Easy
+  */
+ //Struggled for a bit, I tried using a for loop, but would time out. I changed my tactic to solving with a mathematical
+ //approach and used modules (amazing things - I love remainders!).
+
+ function saveThePrisoner(n, m, s) {
+    if (s + (m - 1) <= n) return s + (m - 1)
+    let over = s + (m - 1);
+    if (over % n === 0) return n
+    return over % n;
+}
+//I then reduced to
+function saveThePrisoner(n, m, s) {
+    let over = s + (m - 1);
+    if (over % n === 0) return n
+    return over % n;
+}
+
+//then a nice one liner (not as fast as above though)
+function saveThePrisoner(n, m, s) {
+    return ((s + (m - 1)) % n) || n;
+}

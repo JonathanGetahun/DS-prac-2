@@ -175,3 +175,61 @@ function saveThePrisoner(n, m, s) {
 function saveThePrisoner(n, m, s) {
     return ((s + (m - 1)) % n) || n;
 }
+
+/**
+ * HackerRank - Staircase - Easy
+ */
+//Not too challenging, spent most of my time trying to find another way of doing brute force. Maybe recursively.
+//However, I learned about str.repeat() and str.padStart()
+
+function staircase(n) {
+    let str = "";
+    let hashStr = "";
+    
+    for (let i = 1; i <=n; i++){
+        for (let j = 1; j <= n - i; j++){
+            str += " "
+        }
+        hashStr += "#";
+        console.log(str+hashStr);
+        str = "";
+    }
+}
+
+
+/**
+ * LeetCode 200 - Number of Islands - Medium
+ */
+//Kept being afraid to use a nested for loop because of the time complexity being (O(n * m))
+//also spent a long time not realizing that I need to pass grid into all the recursive call (OBVIOUS)
+//
+//DFS - because you can see the calls are going down deep in one direction. (using recursive call stack)
+function numIslands(grid) {
+    const H = grid.length;
+    const W = H && grid[0].length;
+    let count = 0;
+    
+  
+    for (let r = 0; r < H; r++) {
+      for (let c = 0; c < W; c++) {
+        if (grid[r][c] === '0') continue;
+        
+        count++;
+        dfs(r, c, grid, H, W);
+      }
+    }
+    return count;
+    
+  }
+  
+    function dfs(r, c, grid, H, W) {
+      if (r < 0 || c < 0 || r === H || c === W) return;
+      if (grid[r][c] === '0') return;
+      
+      grid[r][c] = '0';
+      dfs(r-1, c, grid);
+      dfs(r+1, c, grid);
+      dfs(r, c-1, grid);
+      dfs(r, c+1, grid);
+    }
+

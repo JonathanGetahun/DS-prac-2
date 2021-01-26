@@ -233,3 +233,87 @@ function numIslands(grid) {
       dfs(r, c+1, grid);
     }
 
+/**
+ * HackerRank - Bigger is greater - medium
+ */
+//spent waaay too much time on this problem. Need to revisit for a more optimal and shorter code. 
+//even though I think it is O(n), maybe I can shorten syntax. I learned you can compare strings directly to each other
+//to see which is greater based off of their UTF-16 values. And that lexicographically is the comparison of strings 
+//alphabetical order.
+function biggerIsGreater(w) {
+    let firstHalf = '';
+    let secondHalf = '';
+    let completed = '';
+    for (let i = w.length - 1; i >= 0; i--){
+        if(w[i] > w[i - 1]){
+            firstHalf = w.slice(0,i - 1);
+            let lastLetter = w.slice(i-1,i);
+            secondHalf = w.slice(i);
+            if (secondHalf.length === 1){
+                completed = firstHalf+secondHalf+lastLetter.split('').reverse().join('');
+                break;
+            } else {
+                for (let j = secondHalf.length - 1; j >= 0; j--){
+                    if (secondHalf[j] > lastLetter){
+                        let switched = secondHalf[j];
+                        firstHalf += switched;
+                        secondHalf = secondHalf.substring(0,j) + lastLetter + secondHalf.substring(j+1);
+                        completed = firstHalf + secondHalf.split('').reverse().join('');
+                        break;
+                    }
+                } 
+            }
+            break;
+        }
+    }
+    if (completed === '') return 'no answer'
+    return completed
+}
+
+/*
+LeetCode 350 - Intersection of Two Arrays II - easy
+*/
+var intersect = function(nums1, nums2) {
+
+    let checker = {};
+     let result = [];
+     for(let i = 0; i < nums1.length; i++){
+         checker[nums1[i]] = (checker[nums1[i]] || 0) + 1;
+     }
+     
+     for(let i = 0; i < nums2.length; i++){
+         if(checker[nums2[i]]){
+             result.push(nums2[i])
+             checker[nums2[i]] = checker[nums2[i]] - 1;
+         }
+     }
+     
+     return result
+    
+     
+ };
+
+ /**
+  * LeetCode 122 - Best Time to Buy and Sell a Stock  II - easy
+  */
+ var maxProfit = function(prices) {
+    let min = prices[0];
+    let diff = 0;
+    let result = 0;
+    for(let i = 1; i < prices.length; i++){
+        
+        if(prices[i] < min) min = prices[i];
+        if(prices[i] - min > diff) {
+            diff = prices[i] - min
+        }else{
+            result += diff;
+            diff = 0;
+            min = prices[i];
+        }
+        
+    }
+    
+    if(diff > 0) result += diff;
+    return result
+    
+};

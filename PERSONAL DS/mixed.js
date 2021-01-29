@@ -317,3 +317,150 @@ var intersect = function(nums1, nums2) {
     return result
     
 };
+
+/*
+You are a developer for a university. Your current project is to develop a system for students to find courses they share with friends. The university has a system for querying courses students are enrolled in, returned as a list of (ID, course) pairs.
+
+Write a function that takes in a collection of (student ID number, course name) pairs and returns, for every pair of students, a collection of all courses they share.
+
+Sample Input:
+
+student_course_pairs_1 = [
+  ["58", "Linear Algebra"],
+  ["94", "Art History"],
+  ["94", "Operating Systems"],
+  ["17", "Software Design"],
+  ["58", "Mechanics"],
+  ["58", "Economics"],
+  ["17", "Linear Algebra"],
+  ["17", "Political Science"],
+  ["94", "Economics"],
+  ["25", "Economics"],
+  ["58", "Software Design"],
+]
+
+Sample Output (pseudocode, in any order):
+
+find_pairs(student_course_pairs_1) =>
+{
+  "58,17": ["Software Design", "Linear Algebra"]
+  "58,94": ["Economics"]
+  "58,25": ["Economics"]
+  "94,25": ["Economics"]
+  "17,94": []
+  "17,25": []
+}
+
+
+
+Additional test cases:
+
+Sample Input:
+
+student_course_pairs_2 = [
+  ["42", "Software Design"],
+  ["0", "Advanced Mechanics"],
+  ["9", "Art History"],
+]
+
+Sample output:
+
+find_pairs(student_course_pairs_2) =>
+{
+  "0,42": []
+  "0,9": []
+  "9,42": []
+}
+
+
+
+n: number of student,course pairs in the input
+s: number of students
+c: number of courses being offered
+
+*/
+
+"use strict";
+
+const studentCoursePairs1 = [
+  ["58", "Linear Algebra"],
+  ["94", "Art History"],
+  ["94", "Operating Systems"],
+  ["17", "Software Design"],
+  ["58", "Mechanics"],
+  ["58", "Economics"],
+  ["17", "Linear Algebra"],
+  ["17", "Political Science"],
+  ["94", "Economics"],
+  ["25", "Economics"],
+  ["58", "Software Design"]
+];
+
+const studentCoursePairs2 = [
+  ["42", "Software Design"],
+  ["0", "Advanced Mechanics"],
+  ["9", "Art History"]
+];
+
+
+
+
+function findPairs(courses){
+  let shared = {}
+  courses.forEach(val =>{
+    
+  })
+  courses.forEach(val => {
+    shared[val[0]] = ([val[1]]) 
+  })
+  
+  courses.forEach(val => {
+    shared[val[0]] = shared[val[0]].concat([val[1]]);
+  })
+  
+  let result = {}
+  for(let id in shared){
+    let share = []
+    for(let id2 in shared){
+      if(id !== id2 && result[`${id2},${id}`]){
+         share = shared[id].filter(val => {
+          return shared[id2].includes(val)
+        })
+      }
+      let rem = new Set(share)
+      
+      share = []
+      for(let x of rem){
+        share = share.concat(x)
+      }
+      result[`${id},${id2}`] = share
+    }
+  }
+  console.log(result)
+  return shared
+}
+
+findPairs(studentCoursePairs2)  
+findPairs(studentCoursePairs1)
+/**
+
+hash map 
+
+hash map 1 = [
+student Id: [courses, course2],
+
+  
+
+]
+
+for loop hash map1
+for each student id:
+  for loop has map 1
+    final courses = .filter()
+    result.push(`${id1},{id2}`:[final courses])
+result = 
+[
+"id,id": [course1,course2]
+]
+
+*/

@@ -464,3 +464,25 @@ result =
 ]
 
 */
+
+/**
+ * Hackerrank - Counting Valleys - easy
+ */
+function countingValleys(steps, path) {
+  let seaLevel = 0;
+
+  let valley = false;
+  let amount = 0;
+  for (let letter of path){
+      if(letter === 'U') seaLevel += 1;
+      else seaLevel -= 1; 
+      
+      if(seaLevel < 0) valley = true;
+      if(seaLevel >= 0 && valley === true) {
+          amount++;
+          valley = false;
+      }
+  }
+
+  return amount;
+}

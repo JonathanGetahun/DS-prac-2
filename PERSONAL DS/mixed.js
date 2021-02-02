@@ -489,6 +489,9 @@ function countingValleys(steps, path) {
 
 /**
  * HackerRank - Electronics-shop - easy
+ * 
+ * An O(n log (n)) way could have been to have kb descending and drives ascending, and just checking up until
+ * where kb - drives is > b, then move kb.
  */
 function getMoneySpent(keyboards, drives, b) {
   let max = 0;

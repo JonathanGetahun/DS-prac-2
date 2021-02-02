@@ -486,3 +486,19 @@ function countingValleys(steps, path) {
 
   return amount;
 }
+
+/**
+ * HackerRank - Electronics-shop - easy
+ */
+function getMoneySpent(keyboards, drives, b) {
+  let max = 0;
+  
+  keyboards.forEach(key => {
+      drives.forEach(drive => {
+          if (key + drive <= b && key + drive > max){
+              max = key + drive;
+          }
+      })
+  })
+  return max || -1
+}

@@ -505,3 +505,84 @@ function getMoneySpent(keyboards, drives, b) {
   })
   return max || -1
 }
+
+/**
+ * https://www.geeksforgeeks.org/minimum-number-of-manipulations-required-to-make-two-strings-anagram-without-deletion-of-character/
+ * 
+ * Had a lot of trouble with javascript syntax with Map and for...of, and also getting
+ * a clear idea by thinking ahead. I kept trying to use the total. 
+ */
+
+let s1 = "ddcf";
+let s2 = "cedk";
+
+function manipulation(s1,s2){
+    let sum = 0;
+
+    let checker = new Map();
+
+    for (let i = 0; i < s1.length; i++){
+        const val = (checker.get(s1[i]) || 0) + 1;
+        checker.set(s1[i], val)
+    }
+    // console.log(checker)
+    // for (let i = 0; i < s2.length; i++){
+    //     let val = (checker.get(s2[i]) || 0);
+    //     if(checker.has(s2[i])) 
+    //     {
+    //         val = val - 1
+    //         checker.set(s2[i],val )
+    //     } else checker.set(s2[i],++val)
+    // }
+    console.log(checker)
+    for (let i = 0; i < s2.length; i++){
+        if(checker.has(s2[i])){
+            val = checker.get(s2[i]) - 1;
+            checker.set(s2[i],val);
+        }
+    }
+    for (let str of checker){
+        console.log(str)
+        sum += str[1];
+    }
+
+    return sum;
+}
+
+/**
+ * LEETCODE 114. Flatten Binary Tree to Linked List - Medium
+321 <-- insertion order
+
+forgot that you can use a variable to point to a node, to keep track and use it later.
+
+left []
+right []
+
+if (node.left) left.push(node.left)
+if (node.right) right.push(node.right)    
+
+leftval = left.length > 0 ? left.shift() : null
+if(leftval) node.left = null & node.right = leftval
+*/
+
+//iterative
+var flatten = function(root) {
+  if(!root) return null;
+  let node = root;
+  let left = [node.left];
+  let right = [node.right];
+  
+  while(left.length || right.length){
+      let val = left.length > 0 ? left.shift() : right.pop();
+      node.left = null;
+      node.right = val;
+      
+      if(!val) continue
+      node = val;
+      
+
+      if(val.left) left.push(val.left);
+      if(val.right) right.push(val.right);
+  }
+
+};
